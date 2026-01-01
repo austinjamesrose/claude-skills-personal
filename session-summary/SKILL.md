@@ -76,7 +76,7 @@ Create a markdown summary in this format:
 
 The daily log file is located at:
 ```
-~/playground/austin-os/claude-code-sessions/YYYY-MM-DD-claude-session.md
+~/playground/obsidian-notes/austin-os/claude-code-sessions/YYYY-MM-DD-claude-session.md
 ```
 
 #### Hourly Rate for Value Calculation
