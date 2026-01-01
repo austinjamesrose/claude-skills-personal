@@ -76,7 +76,7 @@ Create a markdown summary in this format:
 
 The daily log file is located at:
 ```
-/Users/austin.rose/analysis/obsidian-notes/tag-work/claude-code-sessions/YYYY-MM-DD-claude-session.md
+~/playground/austin-os/claude-code-sessions/YYYY-MM-DD-claude-session.md
 ```
 
 #### Hourly Rate for Value Calculation
@@ -162,7 +162,33 @@ Create it with this header and aggregate callout:
 > **Stats pending** — will update when cache refreshes
 ```
 
-### 5. Confirm to User
+### 5. Backfill Previous Day's Token Stats
+
+Before confirming, check if yesterday's session log has pending token stats that can now be filled in.
+
+**Steps:**
+1. Calculate yesterday's date (YYYY-MM-DD format)
+2. Check if the file exists: `YYYY-MM-DD-claude-session.md`
+3. If it exists, read it and look for `**Stats pending**` in the token usage callout
+4. If pending, check `~/.claude/stats-cache.json` for yesterday's date in `dailyActivity` and `dailyModelTokens`
+5. If stats are now available, update the callout with the actual values
+
+**Example replacement:**
+```markdown
+# Before (pending):
+> [!info] Daily Token Usage
+> **Stats pending** — will update when cache refreshes
+
+# After (backfilled):
+> [!info] Daily Token Usage
+> **Sessions:** 11 · **Messages:** 1,587 · **Tool calls:** 467
+> **Tokens:** 184,010 · **Cost:** $13.80
+```
+
+**If backfill occurs**, mention it to the user:
+- "Also updated yesterday's log (YYYY-MM-DD) with token stats: X tokens, $X.XX cost"
+
+### 6. Confirm to User
 
 After saving, tell the user:
 - The summary was saved
